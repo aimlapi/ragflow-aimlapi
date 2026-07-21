@@ -1,5 +1,6 @@
 import { DynamicForm, DynamicFormRef } from '@/components/dynamic-form';
 import { Modal } from '@/components/ui/modal/modal';
+import { LLMFactory } from '@/constants/llm';
 import { useCommonTranslation, useTranslate } from '@/hooks/common-hooks';
 import { useAddInstanceModel } from '@/hooks/use-llm-request';
 import { IProviderModelItem } from '@/interfaces/request/llm';
@@ -15,6 +16,7 @@ import { LLMHeader } from '../../components/llm-header';
 import VerifyButton from '../verify-button';
 import { AddCustomModelDialog } from './components/add-custom-model-dialog';
 import { AddableToggleList } from './components/addable-toggle-list';
+import { AimlapiGetKeyButton } from './components/aimlapi-get-key-button';
 import { useCustomModelFields } from './components/use-custom-model-fields';
 import {
   useListModelsOptions,
@@ -207,6 +209,14 @@ const ProviderModal = ({
         defaultValues={defaultValues}
         labelClassName="font-normal"
       >
+        {llmFactory === LLMFactory.AIMLAPI && !viewMode && (
+          <AimlapiGetKeyButton
+            onKey={(key) => {
+              const current = formRef.current?.getValues() ?? {};
+              formRef.current?.reset({ ...current, api_key: key });
+            }}
+          />
+        )}
         {hasModelNameField && (
           <AddableToggleList
             className="w-full"

@@ -16,6 +16,8 @@ const {
   editInstanceModel,
   deleteProviderInstance,
   updateModelStatus,
+  aimlapiAuthorizeStart,
+  aimlapiAuthorizePoll,
 } = api;
 
 const methods = {
@@ -78,6 +80,14 @@ const methods = {
   updateModelStatus: {
     url: updateModelStatus,
     method: 'patch',
+  },
+  aimlapiAuthorizeStart: {
+    url: aimlapiAuthorizeStart,
+    method: 'post',
+  },
+  aimlapiAuthorizePoll: {
+    url: aimlapiAuthorizePoll,
+    method: 'post',
   },
 } as const;
 
