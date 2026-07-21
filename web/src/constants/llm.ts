@@ -74,6 +74,7 @@ export enum LLMFactory {
   RAGcon = 'RAGcon',
   Perplexity = 'Perplexity',
   NewAPI = 'New API',
+  AIMLAPI = 'aimlapi.com',
 }
 
 // Please lowercase the file name
@@ -147,6 +148,7 @@ export const IconMap = {
   [LLMFactory.Perplexity]: 'perplexity',
   [LLMFactory.SoMark]: 'somark',
   [LLMFactory.NewAPI]: 'new-api',
+  [LLMFactory.AIMLAPI]: 'aimlapi',
 };
 
 export const ModelTypeToField: Record<string, string> = {
@@ -169,6 +171,7 @@ export const FieldToModelType: Record<string, string> = {
 
 export const APIMapUrl = {
   [LLMFactory.OpenAI]: 'https://platform.openai.com/api-keys',
+  [LLMFactory.AIMLAPI]: 'https://aimlapi.com/app/keys',
   [LLMFactory.Anthropic]: 'https://console.anthropic.com/settings/keys',
   [LLMFactory.Gemini]: 'https://aistudio.google.com/app/apikey',
   [LLMFactory.DeepSeek]: 'https://platform.deepseek.com/api_keys',
