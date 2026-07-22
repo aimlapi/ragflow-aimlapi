@@ -28,7 +28,7 @@ export const LocalLlmConfigs: Record<string, ProviderConfig> = {
         shouldRender: 'hideWhenInstanceExists',
       },
     ],
-    'https://docs.aimlapi.com',
+    'https://docs.aimlapi.com/quickstart/simple-model',
   ),
   [LLMFactory.Ollama]: buildLocalConfig(
     LLMFactory.Ollama,
