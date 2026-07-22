@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/input';
 import { APIMapUrl, LLMFactory } from '@/constants/llm';
 import { useFetchAvailableProviders } from '@/hooks/use-llm-request';
+import { sortLLmFactoryListBySpecifiedOrder } from '@/utils/common-util';
 import { ArrowUpRight, Plus, Star } from 'lucide-react';
 import { FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -91,12 +92,14 @@ export const AvailableModels: FC<{
   }, [factoryList, searchTerm]);
 
   const filteredModels = useMemo(() => {
-    if (selectedTag === null) {
-      return searchedModels;
-    }
-    return searchedModels.filter((model) =>
-      model.model_types.some((type) => type === selectedTag),
-    );
+    const filtered =
+      selectedTag === null
+        ? searchedModels
+        : searchedModels.filter((model) =>
+            model.model_types.some((type) => type === selectedTag),
+          );
+    // AIMLAPI first (then RAGFlow's curated order) in the available list
+    return sortLLmFactoryListBySpecifiedOrder(filtered as any) as typeof filtered;
   }, [searchedModels, selectedTag]);
 
   // Number of providers matching each tag, respecting the current search term so
