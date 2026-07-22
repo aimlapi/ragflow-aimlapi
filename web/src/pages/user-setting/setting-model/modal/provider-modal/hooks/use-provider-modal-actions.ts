@@ -121,6 +121,16 @@ export const useProviderModalActions = ({
     async (values?: FieldValues) => {
       if (!values) return;
 
+      // A list-models provider (picker) must have at least one model selected
+      // before OK. Block with an inline error instead of submitting an empty
+      // instance — mirrors the same guard in handleVerify. (Providers with a
+      // seed catalog like aimlapi would otherwise be accepted empty by the
+      // backend, unlike seedless ones such as OpenRouter.)
+      if (hasModelNameField && modelInfoList.length === 0) {
+        message.error(t('selectModelBeforeVerify'));
+        return;
+      }
+
       // viewMode: only add/update models. The instance itself is not
       // re-saved because all instance-level fields are disabled. The
       // parent receives the selected models (or the model-related form
@@ -185,6 +195,7 @@ export const useProviderModalActions = ({
       llmFactory,
       initialValues,
       baseUrlRegionMaps,
+      t,
     ],
   );
 
